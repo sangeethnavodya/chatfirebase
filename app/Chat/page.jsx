@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Amplify from '@aws-amplify/core';
 import { API, graphqlOperation } from 'aws-amplify';
-import { listMessages as ListMessages } from '../graphql/queries';
+import { ListMessagesBySenderAndRecipient as ListMessagesBySenderAndRecipient } from '../graphql/queries';
 import { createMessages as CreateMessages } from '../graphql/mutations';
 import { onCreateMessages as OnCreateMessages } from '../graphql/subscriptions';
 import config from '../aws-export'; // adjust the path based on your folder structure
@@ -33,12 +33,23 @@ export default function Chat() {
 
   async function fetchMessages() {
     try {
-      const messageData = await API.graphql(graphqlOperation(ListMessages));
-      console.log(messageData.data.listMessages.items)
+      const senderIdValue = "nethmin"; // Replace with actual senderId
+      const recipientIdValue = "sangeeth"; // Replace with actual recipientId
+  
+      const messageData = await API.graphql({
+          query: ListMessagesBySenderAndRecipient,
+          variables: {
+              senderId: senderIdValue,
+              recipientId: recipientIdValue
+          }
+      });
+  
+      console.log(messageData.data.listMessages.items);
       setMessages(messageData.data.listMessages.items);
-    } catch (err) {
+  } catch (err) {
       console.error("Error fetching messages:", err);
-    }
+  }
+  
   }
 
   const sendMessage = async (e) => {

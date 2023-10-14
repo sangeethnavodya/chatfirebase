@@ -20,4 +20,17 @@ export const getMessages = `query GetMessages($id: String!) {
       nextToken
     }
   }`;
+
+
+  export const ListMessagesBySenderAndRecipient=` query ListMessagesBySenderAndRecipient($senderId: String!, $recipientId: String!) {
+    listMessages(filter: { senderId: { eq: $senderId }, recipientId: { eq: $recipientId } }) {
+        items {
+            id
+            content
+            createdAt
+            senderId
+            recipientId
+        }
+    }
+}`;
   
