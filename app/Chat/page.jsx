@@ -34,7 +34,7 @@ export default function Chat() {
   async function fetchMessages() {
     try {
       const senderIdValue = "nethmin"; // Replace with actual senderId
-      const recipientIdValue = "sangeeth"; // Replace with actual recipientId
+      const recipientIdValue = "pasindu"; // Replace with actual recipientId
   
       const messageData = await API.graphql({
           query: ListMessagesBySenderAndRecipient,
@@ -61,8 +61,8 @@ export default function Chat() {
       id:new Date().toISOString(),
       content: message,
       createdAt: new Date().toISOString(),
-      senderId: "you",  // adjust this as per your application's user management
-      recipientId: "recipientId" // adjust this based on the recipient's ID
+      senderId: "nethmin",  // adjust this as per your application's user management
+      recipientId: "sangeeth" // adjust this based on the recipient's ID
     };
 
     try {
